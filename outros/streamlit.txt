@@ -5,4 +5,4 @@ pip install streamlit
 streamlit hello
 
 # abrir (dentro do local de arquivo .py)
-streamlit run main.py
+streamlit run (nomedoarquivo).py
