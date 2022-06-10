@@ -1,0 +1,8 @@
+# instalar: 
+pip install streamlit
+
+# teste:
+streamlit hello
+
+# abrir (dentro do local de arquivo .py)
+streamlit run main.py
