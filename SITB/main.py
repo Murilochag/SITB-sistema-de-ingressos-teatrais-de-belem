@@ -1,9 +1,9 @@
-import streamlit as st
-import sqlite3
-import data.showdb as showdb
-import pandas as pd
+import streamlit as st;
+import Controllers.ShowController as ShowController;
+import models.Show as show;
+import pandas as pd;
 
-##st.title('SITB-sistema de ingressos teatrais de belém')
+
 st.sidebar.title('menu')
 page = st.sidebar.selectbox('',['home','sessões','nova sessão','compras','comprar ingresso','shows','novo show'])
 
@@ -21,13 +21,14 @@ elif page == 'comprar ingresso' :
 
 elif page == 'shows' :
     st.title('shows')
-    costumerList = []
 
-    for item in showdb.selecionarTodos():
-        costumerList.append(item.id, item.name, item.lacation, item.description)
+    costumerList = []
+    for item in ShowController.selecionarTodos():
+        costumerList.append([item.name, item.location, item.description])
 
     df = pd.DataFrame(
-        costumerList = ['id','nome','local','descrição']
+        costumerList,
+        columns=['name','location','descição']
     )
 
     st.table(df)
@@ -43,7 +44,11 @@ elif page == 'novo show' :
 
         input_button_submit = st.form_submit_button('cadastar novo show')
 
-    if input_button_submit :
-        showid = showdb.idShow()
-        showdb.insertInShow(showid,showname,showlocation,showdescription)
-        st.success('Show cadastrado com sucesso!')
+    if input_button_submit:
+
+        show_name = showname
+        show_location = showlocation
+        show_description = showdescription
+
+        ShowController.incluir(show_name, show_location, show_description)
+        st.success('show cadastrado com sucesso')
