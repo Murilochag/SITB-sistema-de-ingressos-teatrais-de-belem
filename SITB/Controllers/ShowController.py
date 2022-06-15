@@ -39,3 +39,7 @@ def selecionarName():
 
     return costumerList
 
+def ExcluirShow(id):
+    db.cur.execute('DELETE FROM show WHERE id= ?', zip(id))
+    db.con.commit()
+

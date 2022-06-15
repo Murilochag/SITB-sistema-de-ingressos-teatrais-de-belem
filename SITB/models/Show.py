@@ -1,5 +1,5 @@
 class Show:
-    def __init__(self, name, location, description) :
+    def __init__(self, id, name, description) :
+        self.id = id
         self.name = name
-        self.location = location
         self.description = description

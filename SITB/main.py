@@ -3,6 +3,9 @@ import Controllers.ShowController as ShowController;
 import models.Show as Show;
 import pandas as pd;
 
+import pages.show.newShow as newShow;
+import pages.show.viewShow as viewShow;
+
 
 st.sidebar.title('menu')
 page = st.sidebar.selectbox('',['home','sessões','nova sessão','compras','comprar ingresso','shows','novo show'])
@@ -13,6 +16,16 @@ elif page == 'sessões' :
     st.title('sessões')
 elif page == 'nova sessão' :
     st.title('nova sessão')
+
+
+    with st.form(key="new_sessao"):
+
+        showname = st.text_input(label='insira o nome')
+        showdescription = st.text_area(label='descrição')
+        teste = st.selectbox('',ShowController.selecionarName())
+
+        input_button_submit = st.form_submit_button('cadastar novo show')
+
 elif page == 'compras' :
     st.title('compras')
 elif page == 'comprar ingresso' :
@@ -22,9 +35,11 @@ elif page == 'comprar ingresso' :
 elif page == 'shows' :
     st.title('shows')
 
+    viewShow.ViewShow()
+
     costumerList = []
     for item in ShowController.selecionarTodos():
-        costumerList.append([item.name, item.location, item.description])
+        costumerList.append([item.id, item.name, item.description])
 
     df = pd.DataFrame(
         costumerList,
@@ -35,21 +50,4 @@ elif page == 'shows' :
 
 #novo show
 elif page == 'novo show' :
-    st.title('novo show')
-
-    with st.form(key="new_show"):
-
-        showname = st.text_input(label='insira o nome')
-        showdescription = st.text_area(label='descrição')
-        teste = st.selectbox('',ShowController.selecionarName())
-
-        input_button_submit = st.form_submit_button('cadastar novo show')
-
-    if input_button_submit:
-
-        show_id = ShowController.idShow()
-        show_name = showname
-        show_description = showdescription
-
-        ShowController.incluir(show_id, show_name, show_description)
-        st.success('show cadastrado com sucesso')
+    newShow.NewShow()
