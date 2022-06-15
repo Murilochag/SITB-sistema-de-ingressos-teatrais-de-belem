@@ -1,6 +1,6 @@
 import streamlit as st;
 import Controllers.ShowController as ShowController;
-import models.Show as show;
+import models.Show as Show;
 import pandas as pd;
 
 
@@ -28,7 +28,7 @@ elif page == 'shows' :
 
     df = pd.DataFrame(
         costumerList,
-        columns=['name','location','descição']
+        columns=['id','nome','descrição']
     )
 
     st.table(df)
@@ -38,17 +38,18 @@ elif page == 'novo show' :
     st.title('novo show')
 
     with st.form(key="new_show"):
+
         showname = st.text_input(label='insira o nome')
-        showlocation = st.selectbox('selecione o teatro',['teatro da paz','estação gasõmestro','waldemar henrique','teatro do sesi','margarida schivasappa'])
         showdescription = st.text_area(label='descrição')
+        teste = st.selectbox('',ShowController.selecionarName())
 
         input_button_submit = st.form_submit_button('cadastar novo show')
 
     if input_button_submit:
 
+        show_id = ShowController.idShow()
         show_name = showname
-        show_location = showlocation
         show_description = showdescription
 
-        ShowController.incluir(show_name, show_location, show_description)
+        ShowController.incluir(show_id, show_name, show_description)
         st.success('show cadastrado com sucesso')
