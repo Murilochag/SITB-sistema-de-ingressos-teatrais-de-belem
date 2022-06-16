@@ -37,17 +37,6 @@ elif page == 'shows' :
 
     viewShow.ViewShow()
 
-    costumerList = []
-    for item in ShowController.selecionarTodos():
-        costumerList.append([item.id, item.name, item.description])
-
-    df = pd.DataFrame(
-        costumerList,
-        columns=['id','nome','descrição']
-    )
-
-    st.table(df)
-
 #novo show
 elif page == 'novo show' :
     newShow.NewShow()

@@ -1,5 +1,6 @@
 import services.database as db;
 import models.Show as show;
+import streamlit as st
 
 def incluir(showid, showname, showdescription):
     db.cur.execute('CREATE TABLE IF NOT EXISTS show (id text, name text, description text)')
@@ -32,14 +33,17 @@ def selecionarTodos():
 
 def selecionarName():
     #db.cur.execute('SELECT name FROM show ')
-    costumerList = []
+    teatroList = []
 
     for row in db.cur.execute('SELECT * FROM show '):
-        costumerList.append(row[1])
+        teatroList.append(row[1])
 
-    return costumerList
+    return teatroList
 
 def ExcluirShow(id):
-    db.cur.execute('DELETE FROM show WHERE id= ?', zip(id))
+    db.cur.execute("DELETE FROM show WHERE id=? ", [id])
     db.con.commit()
+
+def mostrarId(id):
+    st.write(id)
 
