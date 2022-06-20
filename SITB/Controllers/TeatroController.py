@@ -42,3 +42,13 @@ def selecionarId():
 def ExcluirTeatro(id):
     db.cur.execute("DELETE FROM teatro WHERE id=? ", [id])
     db.con.commit()
+
+def selecionarTeatro():
+    #db.cur.execute('SELECT name FROM show ')
+    teatroList = []
+
+    for row in db.cur.execute('SELECT * FROM teatro '):
+        teatroList.append(row[1])
+    return teatroList
+
+criar()

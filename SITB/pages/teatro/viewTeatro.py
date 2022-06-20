@@ -1,7 +1,10 @@
 import streamlit as st;
 import Controllers.TeatroController as TeatroController;
 
-def ViewShow():
+def ViewTeatro():
+
+    st.title('teatro')
+
     colms = st.columns((1,1,1,1))
     campos = ['id', 'nome', 'capacidade','']
     for col, campo_nome in zip(colms, campos):

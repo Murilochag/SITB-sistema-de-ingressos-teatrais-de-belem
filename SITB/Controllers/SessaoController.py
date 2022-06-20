@@ -2,18 +2,18 @@ import services.database as db;
 import models.Sessao as sessao;
 
 def criar():
-    db.cur.execute('CREATE TABLE IF NOT EXISTS sessao (id text, name text, capacity real)')
+    db.cur.execute('CREATE TABLE IF NOT EXISTS sessao (id text, teatro text, show text, data text, hora text)')
 
 
 def incluir(id, teatro, show , data, hora):
     db.cur.execute('CREATE TABLE IF NOT EXISTS sessao (id text, teatro text, show text, data text, hora text)')
 
     db.cur.execute('INSERT INTO sessao (id, teatro, show , data, hora) VALUES (?,?,?,?,?)',
-        (id, teatro, show , data, hora))
+        (str(id), str(teatro), str(show) , str(data), str(hora)))
 
     db.con.commit()
 
-def idTeatro():
+def idSessao():
     if not selecionarTodos() :
         id = 'ss-1000'
         return id
@@ -36,9 +36,11 @@ def selecionarTodos():
 
 def selecionarId():
     idList = []
-    for row in db.cur.execute('SELECT * FROM show '):
+    for row in db.cur.execute('SELECT * FROM sessao '):
         idList.append(row[0])
 
 def ExcluirSessao(id):
-    db.cur.execute("DELETE FROM teatro WHERE id=? ", [id])
+    db.cur.execute("DELETE FROM sessao WHERE id=? ", [id])
     db.con.commit()
+
+criar()

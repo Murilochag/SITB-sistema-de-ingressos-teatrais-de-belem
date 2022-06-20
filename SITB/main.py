@@ -5,6 +5,7 @@ import pages.show.newShow as newShow;
 import pages.show.viewShow as viewShow;
 import pages.teatro.newTeatro as newTeatro;
 import pages.teatro.viewTeatro as viewTeatro;
+import pages.sessao.newSessao as newSessao;
 
 
 st.sidebar.title('menu')
@@ -16,15 +17,7 @@ elif page == 'sessões' :
     st.title('sessões')
 elif page == 'nova sessão' :
     st.title('nova sessão')
-
-
-    with st.form(key="new_sessao"):
-
-        showname = st.text_input(label='insira o nome')
-        showdescription = st.text_area(label='descrição')
-        teste = st.selectbox('',ShowController.selecionarName())
-
-        input_button_submit = st.form_submit_button('cadastar novo show')
+    newSessao.NewSessao()
 
 elif page == 'compras' :
     st.title('compras')
@@ -33,7 +26,6 @@ elif page == 'comprar ingresso' :
 
 
 elif page == 'shows' :
-    st.title('shows')
 
     viewShow.ViewShow()
 
@@ -42,7 +34,7 @@ elif page == 'novo show' :
     newShow.NewShow()
 
 elif page == 'teatros' :
-    viewTeatro.ViewShow()
+    viewTeatro.ViewTeatro()
 
 elif page == 'novo teatro':
     newTeatro.NewTeatro()

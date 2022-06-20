@@ -31,14 +31,14 @@ def selecionarTodos():
 
     return costumerList
 
-def selecionarName():
+def selecionarShow():
     #db.cur.execute('SELECT name FROM show ')
-    teatroList = []
+    showList = []
 
     for row in db.cur.execute('SELECT * FROM show '):
-        teatroList.append(row[1])
+        showList.append(row[1])
 
-    return teatroList
+    return showList
 
 def ExcluirShow(id):
     db.cur.execute("DELETE FROM show WHERE id=? ", [id])
