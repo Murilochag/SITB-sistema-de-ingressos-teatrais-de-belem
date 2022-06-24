@@ -18,7 +18,7 @@ def idSessao():
         id = 'ss-1000'
         return id
     else:
-        for i in db.cur.execute('SELECT id text sessao teatro '): 
+        for i in db.cur.execute('SELECT id FROM sessao'): 
             lastId = i[0]
         lastId = lastId.split('-')
         idNum = int(lastId[1]) + 1
@@ -43,4 +43,41 @@ def ExcluirSessao(id):
     db.cur.execute("DELETE FROM sessao WHERE id=? ", [id])
     db.con.commit()
 
-criar()
+def getSessao():
+    sessList = []
+    for row in db.cur.execute('SELECT * FROM sessao '):
+        sessList.append(row[0] +'; '+ row[1]+'; '+row[2] +'; '+ row[3]+'; '+row[4])
+    return sessList
+
+
+
+
+# get informções:
+def getId(id):
+    idarr = id.split(',')
+    returnId = idarr[0]
+    return str(returnId)
+
+def getTestroById(id):
+    id = getId(id)
+    for row in db.cur.execute("SELECT * FROM sessao WHERE id=? ", [id]):
+        a = row[1]
+        return  str(a)
+
+def getShowById(id):
+    id = getId(id)
+    for row in db.cur.execute("SELECT * FROM sessao WHERE id=? ", [id]):
+        a = row[2]
+        return  str(a)
+
+def getDataById(id):
+    id = getId(id)
+    for row in db.cur.execute("SELECT * FROM sessao WHERE id=? ", [id]):
+        teatro = row[3]
+        return  str(teatro)
+
+def getHoraById(id):
+    id = getId(id)
+    for row in db.cur.execute("SELECT * FROM sessao WHERE id=? ", [id]):
+        teatro = row[4]
+        return  str(teatro)

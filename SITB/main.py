@@ -1,3 +1,4 @@
+from cgi import test
 import streamlit as st;
 import Controllers.ShowController as ShowController;
 
@@ -7,9 +8,11 @@ import pages.teatro.newTeatro as newTeatro;
 import pages.teatro.viewTeatro as viewTeatro;
 import pages.sessao.newSessao as newSessao;
 
+import teste
+
 
 st.sidebar.title('menu')
-page = st.sidebar.selectbox('',['home','sessões','nova sessão','compras','comprar ingresso','shows','novo show','teatros','novo teatro'])
+page = st.sidebar.selectbox('',['home','sessões','nova sessão','compras','comprar ingresso','shows','novo show','teatros','novo teatro','#teste#'])
 
 if page == 'home' :
     st.title('SITB-sistema de ingressos teatrais de belém')
@@ -38,3 +41,6 @@ elif page == 'teatros' :
 
 elif page == 'novo teatro':
     newTeatro.NewTeatro()
+
+elif page == '#teste#':
+    teste.teste()
